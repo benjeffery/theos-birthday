@@ -105,13 +105,13 @@ for (let i = 0; i < max_fireworks-1; i++) {
 function explode() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   let rects = {};
-  fireworks.forEach((firework, index) => {
+  for (let f = 0; f < fireworks.length; ++f) {
+    let firework = fireworks[f];
     let f_x = firework.x;
     let f_y = firework.y;
     if (firework.phase == 'explode') {
       for (let i = 0; i < 10; i++) {
         let fade = i * 20 - firework.age * 1;
-        context.beginPath();
         context.fillStyle = 'rgba(107,84,61,' + (fade / 255) + ')';
         let sparks = firework.centre;
         for (let j = 0; j < sparks.length; ++j) {
@@ -119,13 +119,12 @@ function explode() {
           let trailAge = firework.age + i;
           let x = f_x + s.vx * trailAge;
           let y = f_y + s.vy * trailAge + s.weight * trailAge * s.weight * trailAge;
-          context.rect(x * scale, y * scale, 4 * scale, 4 * scale);
+          context.fillRect(x * scale, y * scale, 4 * scale, 4 * scale);
         }
-        context.fill();
+
       }
       for (let i = 0; i < 10; i++) {
         let fade = i * 20 - firework.age * 1;
-        context.beginPath();
         context.fillStyle = 'rgba(255,209,0,' + (fade / 255) + ')';
         let sparks = firework.petals;
         for (let j = 0; j < sparks.length; ++j) {
@@ -133,9 +132,9 @@ function explode() {
           let trailAge = firework.age + i;
           let x = f_x + s.vx * trailAge;
           let y = f_y + s.vy * trailAge + s.weight * trailAge * s.weight * trailAge;
-          context.rect(x * scale, y * scale, 4 * scale, 4 * scale);
+          context.fillRect(x * scale, y * scale, 4 * scale, 4 * scale);
         }
-        context.fill();
+
       }
       firework.age++;
       if (firework.age > 150 && Math.random() < .05) {
@@ -149,14 +148,11 @@ function explode() {
       firework.y = firework.y - 10;
       firework.x += firework.angle;
       for (let spark = 0; spark < 15; spark++) {
-        context.beginPath();
-        context.fillStyle = 'rgba(' + index * 50 + ',' + spark * 17 + ',0,1)';
-
-        context.rect(scale * (firework.x + Math.random() * spark - spark / 2) - (firework.angle * (spark / 2)), scale * (firework.y + spark * 4), scale * 4, scale * 4);
-        context.fill();
+        context.fillStyle = 'rgba(' + f * 50 + ',' + spark * 17 + ',0,1)';
+        context.fillRect(scale * (firework.x + Math.random() * spark - spark / 2) - (firework.angle * (spark / 2)), scale * (firework.y + spark * 4), scale * 4, scale * 4);
       }
-      if (Math.random() < .001 || firework.y < 450) firework.phase = 'explode';
+      if (Math.random() < .001 || firework.y < scale*450) firework.phase = 'explode';
     }
-  });
+  };
   window.requestAnimationFrame(explode);
 }
