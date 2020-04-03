@@ -116,8 +116,9 @@ function explode() {
           let r = Math.floor(spark.red * fade);
           let g = Math.floor(spark.green * fade);
           let b = Math.floor(spark.blue * fade);
+
           context.beginPath();
-          context.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',1)';
+          context.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + (fade/255) + ')';
           context.rect(x * scale, y*scale, 4*scale, 4*scale);
           context.fill();
         }
