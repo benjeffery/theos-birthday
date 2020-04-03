@@ -1,4 +1,4 @@
-const max_fireworks = 4,
+const max_fireworks = 2,
   max_sparks = 100;
 let canvas = document.getElementById('myCanvas');
 let context = canvas.getContext('2d');
