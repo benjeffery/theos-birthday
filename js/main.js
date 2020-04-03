@@ -9,8 +9,8 @@ let num_petals = 16;
 let petal_radius = 2.5;
 let petal_cutoff = 2;
 
-context.canvas.width = window.innerWidth;
-context.canvas.height = window.innerHeight;
+context.canvas.width = window.innerWidth*window.devicePixelRatio;
+context.canvas.height = window.innerHeight*window.devicePixelRatio;
 let scale = 1;
 
 function resize() {
