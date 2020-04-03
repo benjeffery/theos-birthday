@@ -1,4 +1,4 @@
-const max_fireworks = 3;
+const max_fireworks = 2;
 const max_sparks = 100;
 const interval = 2000;
 let canvas = document.getElementById('myCanvas');
@@ -14,8 +14,8 @@ context.canvas.height = window.innerHeight*window.devicePixelRatio;
 let scale = 1;
 
 function resize() {
-  context.canvas.width = window.innerWidth - 10;
-  context.canvas.height = window.innerHeight - 10;
+  context.canvas.width = window.innerWidth*window.devicePixelRatio;
+  context.canvas.height = window.innerHeight*window.devicePixelRatio;
   scale = Math.min(window.innerWidth, window.innerHeight) / 800;
 }
 window.addEventListener("orientationchange", resize, false);
