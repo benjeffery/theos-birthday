@@ -1,8 +1,8 @@
-const max_fireworks = 2,
-  max_sparks = 100;
+const max_fireworks = 3;
+const max_sparks = 100;
+const interval = 2000;
 let canvas = document.getElementById('myCanvas');
 let context = canvas.getContext('2d');
-let fireworks = [];
 let twopi = 3.141592654 * 2;
 let scaleFactor = 0.125;
 let num_petals = 16;
@@ -17,8 +17,9 @@ function resize() {
   context.canvas.width = window.innerWidth - 10;
   context.canvas.height = window.innerHeight - 10;
   scale = Math.min(window.innerWidth, window.innerHeight) / 800;
-  console.log(scale);
 }
+window.addEventListener("orientationchange", resize, false);
+window.addEventListener("resize", resize, false);
 
 function fib_points(num, rotation, stretch, offx, offy) {
   let points = [];
@@ -36,7 +37,7 @@ function fib_points(num, rotation, stretch, offx, offy) {
   return points;
 }
 
-for (let i = 0; i < max_fireworks; i++) {
+function makeFirework() {
   let firework = {
     petals: [],
     centre: []
@@ -87,18 +88,18 @@ for (let i = 0; i < max_fireworks; i++) {
     };
     firework.petals.push(spark);
   }
-
-  fireworks.push(firework);
-  resetFirework(firework);
-}
-window.requestAnimationFrame(explode);
-
-function resetFirework(firework) {
   firework.x = canvas.width / 2;
   firework.y = canvas.height;
   firework.angle = Math.random() * 8 - 4;
   firework.age = 0;
   firework.phase = 'fly';
+  return firework;
+}
+
+window.requestAnimationFrame(explode);
+let fireworks = [makeFirework()];
+for (let i = 0; i < max_fireworks-1; i++) {
+  setTimeout(function () {fireworks.push(makeFirework())}, Math.random()*interval);
 }
 
 function explode() {
@@ -138,7 +139,11 @@ function explode() {
       }
       firework.age++;
       if (firework.age > 150 && Math.random() < .05) {
-        resetFirework(firework);
+        let index = fireworks.indexOf(firework);
+        if (index > -1) {
+          fireworks.splice(index, 1);
+        }
+        setTimeout(function () {fireworks.push(makeFirework())}, Math.random()*interval);
       }
     } else {
       firework.y = firework.y - 10;
