@@ -13,8 +13,8 @@ context.canvas.width  = window.innerWidth;
 context.canvas.height = window.innerHeight;
 let scale = 1;
 function resize() {
-  context.canvas.width  = window.innerWidth;
-  context.canvas.height = window.innerHeight;
+  context.canvas.width  = window.innerWidth-10;
+  context.canvas.height = window.innerHeight-10;
   scale = Math.min(window.innerWidth, window.innerHeight)/800;
   console.log(scale);
 }
