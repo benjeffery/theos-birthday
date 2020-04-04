@@ -1,4 +1,4 @@
-const max_fireworks = 3;
+const max_fireworks = 2;
 const max_sparks = 100;
 const interval = 2000;
 let canvas = document.getElementById('myCanvas');
