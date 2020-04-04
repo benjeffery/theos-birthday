@@ -16,7 +16,7 @@ let scale = 1;
 function resize() {
   context.canvas.width = window.innerWidth//*window.devicePixelRatio;
   context.canvas.height = window.innerHeight//*window.devicePixelRatio;
-  scale = Math.min(context.canvas.width, context.canvas.height) / 800;
+  scale = (context.canvas.width + context.canvas.height/2) / 800;
 }
 window.addEventListener("orientationchange", resize, false);
 window.addEventListener("resize", resize, false);
