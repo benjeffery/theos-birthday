@@ -1,4 +1,4 @@
-const max_fireworks = 2;
+const max_fireworks = 3;
 const max_sparks = 100;
 const interval = 2000;
 let canvas = document.getElementById('myCanvas');
@@ -9,13 +9,13 @@ let num_petals = 16;
 let petal_radius = 2.5;
 let petal_cutoff = 2;
 
-context.canvas.width = window.innerWidth*window.devicePixelRatio;
-context.canvas.height = window.innerHeight*window.devicePixelRatio;
+context.canvas.width = window.innerWidth//*window.devicePixelRatio;
+context.canvas.height = window.innerHeight//*window.devicePixelRatio;
 let scale = 1;
 
 function resize() {
-  context.canvas.width = window.innerWidth*window.devicePixelRatio;
-  context.canvas.height = window.innerHeight*window.devicePixelRatio;
+  context.canvas.width = window.innerWidth//*window.devicePixelRatio;
+  context.canvas.height = window.innerHeight//*window.devicePixelRatio;
   scale = Math.min(context.canvas.width, context.canvas.height) / 800;
 }
 window.addEventListener("orientationchange", resize, false);
